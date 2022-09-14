@@ -24,8 +24,8 @@ public class ItemManager {
             ps.setString(1, item.getTitle());
             ps.setDouble(2, item.getPrice());
             ps.setString(3, item.getPicUrl());
-            ps.setObject(4, item.getCategory());
-            ps.setObject(5, item.getUser());
+            ps.setInt(4, item.getCategory().getId());
+            ps.setInt(5, item.getUser().getId());
             ps.executeUpdate();
             ResultSet resultSet = ps.getGeneratedKeys();
             if (resultSet.next()) {

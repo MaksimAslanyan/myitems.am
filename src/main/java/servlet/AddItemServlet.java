@@ -46,7 +46,7 @@ public class AddItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getSession().getAttribute("user");
+
         String title = req.getParameter("title");
         double price = Double.parseDouble(req.getParameter("price"));
         int categoryId = Integer.parseInt(req.getParameter("category"));
@@ -58,7 +58,7 @@ public class AddItemServlet extends HttpServlet {
             filename = nanoTime + "-" + itemPic.getSubmittedFileName();
             itemPic.write(UPLOAD_DIR + filename);
         }
-
+        User user = (User) req.getSession().getAttribute("user");
         Item item = Item.builder()
                 .title(title)
                 .price(price)
