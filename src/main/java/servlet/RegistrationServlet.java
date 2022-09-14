@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/registration")
+@WebServlet(urlPatterns = "/registr")
 public class RegistrationServlet extends HttpServlet {
 
     UserManager userManager = new UserManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/registrartion.jsp").forward(req, resp);
+        req.getRequestDispatcher("/registr.jsp").forward(req, resp);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class RegistrationServlet extends HttpServlet {
             String name = req.getParameter("name");
             String surname = req.getParameter("surname");
             String password = req.getParameter("password");
-            String rePassword = req.getParameter("re-password");
+            String rePassword = req.getParameter("rePassword");
             if (!password.equals(rePassword)) {
                 req.getSession().setAttribute("msg", "passwords are not match");
                 resp.sendRedirect("/");
@@ -47,7 +47,6 @@ public class RegistrationServlet extends HttpServlet {
                 req.getSession().setAttribute("msg", "user was register successfully");
                 resp.sendRedirect("/");
             }
-
 
         }
     }

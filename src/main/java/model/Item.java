@@ -14,6 +14,6 @@ public class Item {
     private String title;
     private double price;
     private String picUrl;
-    private Category categoryId;
-    private User userId;
+    private Category category;
+    private User user;
 }

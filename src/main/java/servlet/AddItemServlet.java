@@ -23,39 +23,39 @@ import java.io.IOException;
 public class AddItemServlet extends HttpServlet {
 
 
-    private static final String UPLOAD_DIR = "/Users/karen/data/lessons/java2021/web/UserBook/uploadedImages/";
+    private static final String UPLOAD_DIR = "C:\\Users\\PC user\\Desktop\\temp";
 
     private ItemManager itemManager = new ItemManager();
     private CategoryManager categoryManager = new CategoryManager();
-    private UserManager userManager =  new UserManager();
+    private UserManager userManager = new UserManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/add/item.jsp").forward(req, resp);
+        req.getRequestDispatcher("/additem.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = req.getParameter("title");
         double price = Double.parseDouble(req.getParameter("price"));
-        Part profilePicPart = req.getPart("profilePic");
-        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
-        int userId = Integer.parseInt(req.getParameter("userId"));
-
-        String fileName = null;
-        if (profilePicPart != null) {
+        int categoryId = Integer.parseInt(req.getParameter("category"));
+        Part itemPic = req.getPart("itemPic");
+        String filename = null;
+        if(itemPic != null){
             long nanoTime = System.nanoTime();
-            fileName = nanoTime + "_" + profilePicPart.getName();
-            profilePicPart.write(UPLOAD_DIR + fileName);
+
+            filename = nanoTime + "-" + itemPic.getSubmittedFileName();
+            itemPic.write(UPLOAD_DIR + filename);
         }
+        int userId = Integer.parseInt(req.getParameter("id"));
+
         Item item = Item.builder()
                 .title(title)
                 .price(price)
-                .picUrl(fileName)
-                .categoryId(categoryManager.getById(categoryId))
-                .userId(userManager.getById(userId))
+                .category(categoryManager.getById(categoryId))
+                .picUrl(filename)
+                .user(userManager.getById(userId))
                 .build();
-
         itemManager.addItem(item);
         req.getSession().setAttribute("msg", "Item was added");
         resp.sendRedirect("/add/item");

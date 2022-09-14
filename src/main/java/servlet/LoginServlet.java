@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/login")
@@ -20,14 +21,17 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        User user = userManager.getUserByEmailAndPassword(email, password);
+        User user = userManager.getUserEmailAndPassword(email, password);
         if (user == null) {
             req.getSession().setAttribute("msg", "Wrong username or password");
             resp.sendRedirect("/");
         } else {
+            HttpSession session = req.getSession();
+            session.setMaxInactiveInterval(10 * 60);
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("/");
         }
 
     }
-}
+    }
+
