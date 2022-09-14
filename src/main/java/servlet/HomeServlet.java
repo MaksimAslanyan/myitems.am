@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/")
+@WebServlet(urlPatterns = "")
 public class HomeServlet extends HttpServlet {
 
 
@@ -27,5 +27,6 @@ public class HomeServlet extends HttpServlet {
         List<Category> categoryList = categoryManager.getAllCategory();
         request.setAttribute("category", categoryList);
         request.getRequestDispatcher("index.jsp").forward(request, response);
+
     }
 }

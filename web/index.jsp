@@ -17,7 +17,7 @@
 <head>
     <%
         User user = (User) session.getAttribute("user");
-        List<Item> itemList = (List<Item>) request.getAttribute("item");
+        List<Item> itemList = (List<Item>) request.getAttribute("all");
         List<Category> categoryList = (List<Category>) request.getAttribute("category");
     %>
     <meta charset="utf-8">
@@ -73,7 +73,7 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="#" class="active">Home</a></li>
-                        <%for (Category category : categoryList) {%>
+                        <% for (Category category : categoryList) {%>
                         <li class=""><a href="/?cat_id<%=category.getId()%>"
                                         class="active"><%=category.getName()%>
                         </a></li>
