@@ -55,7 +55,7 @@ public class UserManager {
         try {
             Connection connection = pool.getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setInt(1,id);
+            pStatement.setInt(1, id);
             ResultSet resultSet = pStatement.executeQuery();
             if (resultSet.next()) {
                 return getUserFromResultSet(resultSet);
@@ -67,23 +67,23 @@ public class UserManager {
         return null;
     }
 
-public User getUserEmailAndPassword(String email, String password){
-    String sql = "select * from user where email = ? and password = ?";
-    try {
-        Connection connection = pool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, password);
-        ResultSet resultSet = preparedStatement.executeQuery();
+    public User getUserEmailAndPassword(String email, String password) {
+        String sql = "select * from user where email = ? and password = ?";
+        try {
+            Connection connection = pool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        if(resultSet.next()){
-            return getUserFromResultSet(resultSet);
+            if (resultSet.next()) {
+                return getUserFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return null;
     }
-    return null;
-}
 
     public User getUserByEmail(String email) {
         String sql = "select * from user where email = ?";

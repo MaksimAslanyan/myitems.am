@@ -31,11 +31,11 @@ public class CategoryManager {
     }
 
     public Category getById(int id) {
-        String sql = "select * from category where id = ?" ;
+        String sql = "select * from category where id = ?";
         try {
             Connection connection = pool.getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setInt(1,id);
+            pStatement.setInt(1, id);
             ResultSet resultSet = pStatement.executeQuery();
             if (resultSet.next()) {
                 return getCategoryFromResultSet(resultSet);

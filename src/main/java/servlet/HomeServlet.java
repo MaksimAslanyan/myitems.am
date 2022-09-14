@@ -17,15 +17,15 @@ import java.util.List;
 public class HomeServlet extends HttpServlet {
 
 
-  CategoryManager categoryManager = new CategoryManager();
-  ItemManager itemManager = new ItemManager();
+    CategoryManager categoryManager = new CategoryManager();
+    ItemManager itemManager = new ItemManager();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Item> all = itemManager.getAll();
-        request.setAttribute("all",all);
+        request.setAttribute("all", all);
         List<Category> categoryList = categoryManager.getAllCategory();
-        request.setAttribute("category",categoryList);
+        request.setAttribute("category", categoryList);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

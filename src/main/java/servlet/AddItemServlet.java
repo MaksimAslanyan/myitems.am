@@ -41,7 +41,7 @@ public class AddItemServlet extends HttpServlet {
         int categoryId = Integer.parseInt(req.getParameter("category"));
         Part itemPic = req.getPart("itemPic");
         String filename = null;
-        if(itemPic != null){
+        if (itemPic != null) {
             long nanoTime = System.nanoTime();
 
             filename = nanoTime + "-" + itemPic.getSubmittedFileName();
