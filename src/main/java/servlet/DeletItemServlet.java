@@ -18,6 +18,6 @@ public class DeletItemServlet extends HttpServlet {
         int itemId = Integer.parseInt(req.getParameter("id"));
         itemManager.removeItemById(itemId);
         req.getSession().setAttribute("msg", "Item was removed");
-        resp.sendRedirect("/home");
+        resp.sendRedirect("/");
     }
 }

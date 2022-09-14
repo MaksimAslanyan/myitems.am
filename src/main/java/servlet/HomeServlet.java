@@ -25,8 +25,8 @@ public class HomeServlet extends HttpServlet {
         List<Item> all = itemManager.getAll();
         request.setAttribute("all", all);
         List<Category> categoryList = categoryManager.getAllCategory();
-        request.setAttribute("category", categoryList);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.setAttribute("cat", categoryList);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
 
     }
 }

@@ -23,8 +23,6 @@ public class ShowMyItemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
         List<Item> myItem = itemManager.getMyItemById(user.getId());
-        List<Item> all = itemManager.getAll();
-        req.setAttribute("all", all);
         req.setAttribute("myItem", myItem);
         req.getRequestDispatcher("/WEB-INF/showMyItem.jsp").forward(req, resp);
     }
