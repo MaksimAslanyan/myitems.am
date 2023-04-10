@@ -1,0 +1,24 @@
+name: compile-check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: |
+          mvn -B clean package
+          if [ $? -ne 0 ]; then exit 1; fi
+      - name: Fail the build if Maven fails
+        if: ${{ failure() }}
+        run: exit 1
